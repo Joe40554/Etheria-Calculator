@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: README / 下一步任務
+    url: https://github.com/Joe40554/Etheria-Calculator#readme
+    about: 查看現有說明與「下一步任務」區塊。
+  - name: Issues 導覽
+    url: https://github.com/Joe40554/Etheria-Calculator/issues
+    about: 在此建立或查看所有任務與問題。
