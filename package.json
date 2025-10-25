@@ -1,0 +1,27 @@
+{
+  "name": "iser-calculator",
+  "version": "1.0.0",
+  "description": "伊瑟計算器桌面應用",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "build": {
+    "appId": "com.iser.calculator",
+    "productName": "伊瑟計算器",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "icon.ico"
+    }
+  }
+}

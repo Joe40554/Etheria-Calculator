@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伊瑟計算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+        }
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stat-input {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .stat-input label {
+            width: 120px;
+            margin-right: 10px;
+        }
+        .stat-input input {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        .equipment-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .equipment-slot {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            width: 300px;
+            background-color: #f9f9f9;
+        }
+        .main-stat {
+            margin-bottom: 15px;
+        }
+        .sub-stats {
+            margin-bottom: 15px;
+        }
+        .sub-stat-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .sub-stat-container select {
+            flex: 2;
+            margin-right: 10px;
+            padding: 5px;
+        }
+        .sub-stat-container input {
+            flex: 1;
+            margin-right: 10px;
+            padding: 5px;
+        }
+        .sub-stat-container button {
+            padding: 5px 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .equipment-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .equipment-actions button, .equipment-actions select {
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .equipment-actions select {
+            background-color: white;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .pet-section {
+            margin-top: 30px;
+        }
+        .pet-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .pet-skill {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .pet-skill select {
+            margin-right: 10px;
+            padding: 5px;
+        }
+        .pet-skill input {
+            width: 80px;
+            padding: 5px;
+        }
+        .total-stats {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 5px;
+        }
+        .total-stats h2 {
+            margin-top: 0;
+        }
+        .calculate-btn {
+            padding: 10px 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>伊瑟計算器</h1>
+        
+        <div class="stats-container">
+            <div>
+                <h2>基本屬性</h2>
+                <div class="stat-input">
+                    <label for="health">生命:</label>
+                    <input type="number" id="health" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="attack">攻擊:</label>
+                    <input type="number" id="attack" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="defense">防禦:</label>
+                    <input type="number" id="defense" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="speed">速度:</label>
+                    <input type="number" id="speed" min="0" value="0">
+                </div>
+            </div>
+            
+            <div>
+                <h2>進階屬性</h2>
+                <div class="stat-input">
+                    <label for="crit-rate">暴擊率:</label>
+                    <input type="number" id="crit-rate" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="crit-damage">暴擊傷害:</label>
+                    <input type="number" id="crit-damage" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="effect-hit">效果命中:</label>
+                    <input type="number" id="effect-hit" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="effect-resist">效果抵抗:</label>
+                    <input type="number" id="effect-resist" min="0" value="0">
+                </div>
+            </div>
+        </div>
+        
+        <h2>裝備</h2>
+        <div class="equipment-slots">
+            <div id="helmet" class="equipment-slot" data-type="頭盔" data-main-stat="攻擊">
+                <h3>頭盔</h3>
+                <div class="main-stat">
+                    <label>主要屬性: 攻擊</label>
+                    <input type="number" class="main-stat-value" min="0" value="0">
+                </div>
+                <div class="sub-stats">
+                    <h4>次要屬性</h4>
+                    <div class="sub-stat-container">
+                        <select class="sub-stat-type">
+                            <option value="">選擇屬性</option>
+                            <option value="health-percent">生命加成</option>
+                            <option value="health">生命</option>
+                            <option value="attack-percent">攻擊加成</option>
+                            <option value="attack">攻擊</option>
+                            <option value="defense-percent">防禦加成</option>
+                            <option value="defense">防禦</option>
+                            <option value="speed">速度</option>
+                            <option value="crit-rate">暴擊率</option>
+                            <option value="crit-damage">暴擊傷害</option>
+                            <option value="effect-hit">效果命中</option>
+                            <option value="effect-resist">效果抵抗</option>
+                        </select>
+                        <input type="number" class="sub-stat-value" min="0" value="0">
+                        <button class="delete-sub-stat">X</button>
+                    </div>
+                </div>
+                <div class="equipment-actions">
+                    <button class="add-sub-stat-btn">添加次要屬性</button>
+                    <button class="save-equipment-btn" data-slot="helmet">儲存裝備</button>
+                    <select class="load-equipment-select" data-slot="helmet">
+                        <option value="">選擇裝備</option>
+                    </select>
+                    <button class="load-equipment-btn" data-slot="helmet">載入</button>
+                    <button class="delete-equipment-btn" data-slot="helmet">刪除</button>
+                </div>
+            </div>
+            
+            <!-- 其他裝備欄位類似，這裡省略 -->
+            
+        </div>
+        
+        <div class="pet-section">
+            <h2>寵物</h2>
+            <div class="pet-stats">
+                <div class="stat-input">
+                    <label for="pet-health">生命:</label>
+                    <input type="number" id="pet-health" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="pet-attack">攻擊:</label>
+                    <input type="number" id="pet-attack" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="pet-defense">防禦:</label>
+                    <input type="number" id="pet-defense" min="0" value="0">
+                </div>
+                <div class="stat-input">
+                    <label for="pet-speed">速度:</label>
+                    <input type="number" id="pet-speed" min="0" value="0">
+                </div>
+            </div>
+            
+            <h3>寵物技能</h3>
+            <div class="pet-skill">
+                <select id="pet-skill1-type">
+                    <option value="">選擇屬性</option>
+                    <option value="health-percent">生命加成</option>
+                    <option value="attack-percent">攻擊加成</option>
+                    <option value="defense-percent">防禦加成</option>
+                    <option value="speed">速度</option>
+                    <option value="crit-rate">暴擊率</option>
+                    <option value="crit-damage">暴擊傷害</option>
+                    <option value="effect-hit">效果命中</option>
+                    <option value="effect-resist">效果抵抗</option>
+                </select>
+                <input type="number" id="pet-skill1-value" min="0" value="0">
+            </div>
+            <div class="pet-skill">
+                <select id="pet-skill2-type">
+                    <option value="">選擇屬性</option>
+                    <option value="health-percent">生命加成</option>
+                    <option value="attack-percent">攻擊加成</option>
+                    <option value="defense-percent">防禦加成</option>
+                    <option value="speed">速度</option>
+                    <option value="crit-rate">暴擊率</option>
+                    <option value="crit-damage">暴擊傷害</option>
+                    <option value="effect-hit">效果命中</option>
+                    <option value="effect-resist">效果抵抗</option>
+                </select>
+                <input type="number" id="pet-skill2-value" min="0" value="0">
+            </div>
+            
+            <div class="equipment-actions">
+                <button id="save-pet">儲存寵物</button>
+                <select id="load-pet-select">
+                    <option value="">選擇寵物</option>
+                </select>
+                <button id="load-pet">載入</button>
+                <button id="delete-pet">刪除</button>
+            </div>
+        </div>
+        
+        <div class="total-stats">
+            <h2>總數值</h2>
+            <div class="stat-input">
+                <label>總生命:</label>
+                <span id="total-health">0</span>
+            </div>
+            <div class="stat-input">
+                <label>總攻擊:</label>
+                <span id="total-attack">0</span>
+            </div>
+            <div class="stat-input">
+                <label>總防禦:</label>
+                <span id="total-defense">0</span>
+            </div>
+            <div class="stat-input">
+                <label>總速度:</label>
+                <span id="total-speed">0</span>
+            </div>
+            <div class="stat-input">
+                <label>總暴擊率:</label>
+                <span id="total-crit-rate">0</span>%
+            </div>
+            <div class="stat-input">
+                <label>總暴擊傷害:</label>
+                <span id="total-crit-damage">0</span>%
+            </div>
+            <div class="stat-input">
+                <label>總效果命中:</label>
+                <span id="total-effect-hit">0</span>%
+            </div>
+            <div class="stat-input">
+                <label>總效果抵抗:</label>
+                <span id="total-effect-resist">0</span>%
+            </div>
+        </div>
+        
+        <button id="calculate-btn" class="calculate-btn">計算總數值</button>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

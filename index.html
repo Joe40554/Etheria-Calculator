@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伊瑟計算器 - 角色數值與裝備計算</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>伊瑟計算器</h1>
+            <p>角色數值與裝備計算工具</p>
+        </header>
+
+        <main>
+            <section class="character-stats">
+                <h2>角色基本屬性</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <label for="health">生命</label>
+                        <input type="number" id="health" min="0" value="1000">
+                    </div>
+                    <div class="stat-item">
+                        <label for="attack">攻擊</label>
+                        <input type="number" id="attack" min="0" value="100">
+                    </div>
+                    <div class="stat-item">
+                        <label for="defense">防禦</label>
+                        <input type="number" id="defense" min="0" value="50">
+                    </div>
+                    <div class="stat-item">
+                        <label for="speed">速度</label>
+                        <input type="number" id="speed" min="0" value="100">
+                    </div>
+                    <div class="stat-item">
+                        <label for="crit-rate">暴擊率 (%)</label>
+                        <input type="number" id="crit-rate" min="0" max="100" value="10">
+                    </div>
+                    <div class="stat-item">
+                        <label for="crit-damage">暴擊傷害 (%)</label>
+                        <input type="number" id="crit-damage" min="0" value="150">
+                    </div>
+                    <div class="stat-item">
+                        <label for="effect-hit">效果命中 (%)</label>
+                        <input type="number" id="effect-hit" min="0" max="100" value="0">
+                    </div>
+                    <div class="stat-item">
+                        <label for="effect-resist">效果抵抗 (%)</label>
+                        <input type="number" id="effect-resist" min="0" max="100" value="0">
+                    </div>
+                </div>
+            </section>
+
+            <section class="equipment">
+                <h2>裝備設定</h2>
+                <div class="equipment-slots">
+                    <div id="helmet" class="equipment-slot" data-type="面甲" data-main-stat="攻擊">
+                        <h3>面甲</h3>
+                        <div class="main-stat">
+                            <label>主要屬性: 攻擊</label>
+                            <input type="number" class="main-stat-value" min="0" value="0">
+                        </div>
+                        <div class="sub-stats">
+                            <h4>次要屬性</h4>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                        </div>
+                        <div class="equipment-actions">
+                            <button class="save-equipment-btn" data-slot="helmet">儲存裝備</button>
+                            <select class="load-equipment-select" data-slot="helmet">
+                                <option value="">選擇裝備</option>
+                            </select>
+                            <button class="load-equipment-btn" data-slot="helmet">載入</button>
+                            <button class="delete-equipment-btn" data-slot="helmet">刪除</button>
+                        </div>
+                    </div>
+
+                    <div id="crystal" class="equipment-slot" data-type="晶管" data-main-stat="生命">
+                        <h3>晶管</h3>
+                        <div class="main-stat">
+                            <label>主要屬性: 生命</label>
+                            <input type="number" class="main-stat-value" min="0" value="0">
+                        </div>
+                        <div class="sub-stats">
+                            <h4>次要屬性</h4>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                        </div>
+                        <div class="equipment-actions">
+                            <button class="save-equipment-btn" data-slot="crystal">儲存裝備</button>
+                            <select class="load-equipment-select" data-slot="crystal">
+                                <option value="">選擇裝備</option>
+                            </select>
+                            <button class="load-equipment-btn" data-slot="crystal">載入</button>
+                            <button class="delete-equipment-btn" data-slot="crystal">刪除</button>
+                        </div>
+                    </div>
+
+                    <div id="bracelet" class="equipment-slot" data-type="腕輪" data-main-stat="防禦">
+                        <h3>腕輪</h3>
+                        <div class="main-stat">
+                            <label>主要屬性: 防禦</label>
+                            <input type="number" class="main-stat-value" min="0" value="0">
+                        </div>
+                        <div class="sub-stats">
+                            <h4>次要屬性</h4>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="equipment-actions">
+                                <button class="save-equipment-btn" data-slot="bracelet">儲存裝備</button>
+                                <select class="load-equipment-select" data-slot="bracelet">
+                                    <option value="">選擇裝備</option>
+                                </select>
+                                <button class="load-equipment-btn" data-slot="bracelet">載入</button>
+                                <button class="delete-equipment-btn" data-slot="bracelet">刪除</button>
+                            </div>
+                    </div>
+
+                    <div id="accessory1" class="equipment-slot" data-type="飾品" data-slot="1">
+                        <h3>飾品 1</h3>
+                        <div class="main-stat">
+                            <label>主要屬性:</label>
+                            <div style="display: flex; align-items: center; margin-top: 5px;">
+                                <select class="main-stat-type" style="margin-right: 10px;">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="main-stat-value" min="0" value="0">
+                            </div>
+                        </div>
+                        <div class="sub-stats">
+                            <h4>次要屬性</h4>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <button class="add-sub-stat">+ 新增次要屬性</button>
+                        </div>
+                        <div class="equipment-actions">
+                            <button class="save-equipment-btn" data-slot="accessory1">儲存裝備</button>
+                            <select class="load-equipment-select" data-slot="accessory1">
+                                <option value="">選擇裝備</option>
+                            </select>
+                            <button class="load-equipment-btn" data-slot="accessory1">載入</button>
+                            <button class="delete-equipment-btn" data-slot="accessory1">刪除</button>
+                        </div>
+                    </div>
+
+                    <div id="accessory2" class="equipment-slot" data-type="飾品" data-slot="2">
+                        <h3>飾品 2</h3>
+                        <div class="main-stat">
+                            <label>主要屬性:</label>
+                            <div style="display: flex; align-items: center; margin-top: 5px;">
+                                <select class="main-stat-type" style="margin-right: 10px;">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="main-stat-value" min="0" value="0">
+                            </div>
+                        </div>
+                        <div class="sub-stats">
+                            <h4>次要屬性</h4>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <button class="add-sub-stat">+ 新增次要屬性</button>
+                        </div>
+                        <div class="equipment-actions">
+                            <button class="save-equipment-btn" data-slot="accessory2">儲存裝備</button>
+                            <select class="load-equipment-select" data-slot="accessory2">
+                                <option value="">選擇裝備</option>
+                            </select>
+                            <button class="load-equipment-btn" data-slot="accessory2">載入</button>
+                            <button class="delete-equipment-btn" data-slot="accessory2">刪除</button>
+                        </div>
+                    </div>
+
+                    <div id="accessory3" class="equipment-slot" data-type="飾品" data-slot="3">
+                        <h3>飾品 3</h3>
+                        <div class="main-stat">
+                            <label>主要屬性:</label>
+                            <div style="display: flex; align-items: center; margin-top: 5px;">
+                                <select class="main-stat-type" style="margin-right: 10px;">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="main-stat-value" min="0" value="0">
+                            </div>
+                        </div>
+                        <div class="sub-stats">
+                            <h4>次要屬性</h4>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <div class="sub-stat-container">
+                                <select class="sub-stat-type">
+                                    <option value="">選擇屬性</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                    <option value="speed">速度</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊傷害</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" class="sub-stat-value" min="0" value="0">
+                                <button class="delete-sub-stat">X</button>
+                            </div>
+                            <button class="add-sub-stat">+ 新增次要屬性</button>
+                        </div>
+                        <div class="equipment-actions">
+                            <button class="save-equipment-btn" data-slot="accessory3">儲存裝備</button>
+                            <select class="load-equipment-select" data-slot="accessory3">
+                                <option value="">選擇裝備</option>
+                            </select>
+                            <button class="load-equipment-btn" data-slot="accessory3">載入</button>
+                            <button class="delete-equipment-btn" data-slot="accessory3">刪除</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pet">
+                <h2>寵物設定</h2>
+                <div class="pet-container">
+                    <div class="pet-stats">
+                        <h3>寵物屬性</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <label for="pet-health">生命</label>
+                                <input type="number" id="pet-health" min="0" value="0">
+                            </div>
+                            <div class="stat-item">
+                                <label for="pet-attack">攻擊</label>
+                                <input type="number" id="pet-attack" min="0" value="0">
+                            </div>
+                            <div class="stat-item">
+                                <label for="pet-defense">防禦</label>
+                                <input type="number" id="pet-defense" min="0" value="0">
+                            </div>
+                            <div class="stat-item">
+                                <label for="pet-speed">速度</label>
+                                <input type="number" id="pet-speed" min="0" value="0">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pet-skills">
+                        <h3>寵物技能</h3>
+                        <div class="skill-container">
+                            <div class="skill">
+                                <label>技能1:</label>
+                                <select id="pet-skill1-type">
+                                    <option value="">選擇技能</option>
+                                    <option value="attack-percent">攻擊加成</option>
+                                    <option value="attack">攻擊</option>
+                                    <option value="health-percent">生命加成</option>
+                                    <option value="health">生命</option>
+                                    <option value="defense-percent">防禦加成</option>
+                                    <option value="defense">防禦</option>
+                                </select>
+                                <input type="number" id="pet-skill1-value" min="0" value="0">
+                            </div>
+                            <div class="skill">
+                                <label>技能2:</label>
+                                <select id="pet-skill2-type">
+                                    <option value="">選擇技能</option>
+                                    <option value="crit-rate">暴擊率</option>
+                                    <option value="crit-damage">暴擊加成</option>
+                                    <option value="speed">速度</option>
+                                    <option value="effect-hit">效果命中</option>
+                                    <option value="effect-resist">效果抵抗</option>
+                                </select>
+                                <input type="number" id="pet-skill2-value" min="0" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="save-load">
+                <h2>儲存與載入</h2>
+                <div class="save-container">
+                    <div class="save-equipment">
+                    <h3>儲存裝備</h3>
+                    <input type="text" id="equipment-name" placeholder="輸入裝備名稱">
+                    <select id="equipment-type-select">
+                        <option value="">選擇裝備類型</option>
+                        <option value="面甲">面甲</option>
+                        <option value="晶管">晶管</option>
+                        <option value="腕輪">腕輪</option>
+                        <option value="飾品">飾品</option>
+                    </select>
+                    <select id="accessory-slot-select" style="display: none;">
+                        <option value="">選擇飾品欄位</option>
+                        <option value="accessory1">飾品1</option>
+                        <option value="accessory2">飾品2</option>
+                        <option value="accessory3">飾品3</option>
+                    </select>
+                    <button id="save-equipment">儲存當前裝備</button>
+                    <h3>載入裝備</h3>
+                    <select id="load-equipment-type-select">
+                        <option value="">選擇裝備類型</option>
+                        <option value="面甲">面甲</option>
+                        <option value="晶管">晶管</option>
+                        <option value="腕輪">腕輪</option>
+                        <option value="飾品">飾品</option>
+                    </select>
+                    <select id="load-equipment-select">
+                        <option value="">選擇已儲存的裝備</option>
+                    </select>
+                    <button id="load-equipment">載入裝備</button>
+                    <button id="delete-equipment">刪除裝備</button>
+                </div>
+                    <div class="save-pet">
+                        <h3>寵物設定</h3>
+                        <input type="text" id="pet-name" placeholder="輸入寵物名稱">
+                        <button id="save-pet">儲存當前寵物</button>
+                        <select id="load-pet-select">
+                            <option value="">選擇已儲存的寵物</option>
+                        </select>
+                        <button id="load-pet">載入寵物</button>
+                        <button id="delete-pet">刪除寵物</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="total-stats">
+                <h2>總計數值</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <label>總生命</label>
+                        <span id="total-health">1000</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>總攻擊</label>
+                        <span id="total-attack">100</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>總防禦</label>
+                        <span id="total-defense">50</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>總速度</label>
+                        <span id="total-speed">100</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>總暴擊率</label>
+                        <span id="total-crit-rate">5%</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>總暴擊傷害</label>
+                        <span id="total-crit-damage">150%</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>總效果命中</label>
+                        <span id="total-effect-hit">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>總效果抵抗</label>
+                        <span id="total-effect-resist">0%</span>
+                    </div>
+                </div>
+                <button id="calculate-btn">計算總數值</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>伊瑟計算器 &copy; 2023</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
